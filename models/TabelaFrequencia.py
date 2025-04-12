@@ -26,4 +26,8 @@ class TabelaFrequencia:
     
     def obterFrequencias(self) -> list[int]:
         return [i.frequencia for i in self.classes]
+    
+    def obterPontosMedios(self):
+        return [i.pontoMedio for i in self.classes]
+    
         
