@@ -25,7 +25,7 @@ class ProcessadorEstatistico:
         for i in range(len(tabelaFrequencia.classes)):
             classeAtual = tabelaFrequencia.classes[i]
             for j in range(len(copyRol)):
-                if copyRol[0] >= classeAtual.limiteInferior and copyRol[0] < classeAtual.limiteSuperior:
+                if (copyRol[0] >= classeAtual.limiteInferior and copyRol[0] < classeAtual.limiteSuperior):
                     classeAtual.dados.append(copyRol.pop(0))
                 else:
                     break
@@ -36,6 +36,6 @@ class ProcessadorEstatistico:
             if (classeAtual.numClasse == 1):
                 classeAtual.setFrequenciaAcumulada(classeAtual.frequencia)
             else:
-                classeAtual.setFrequenciaAcumulada(tabelaFrequencia.classes[i-1].frequenciaAcumulada)
+                classeAtual.setFrequenciaAcumulada(tabelaFrequencia.classes[i-1].frequenciaAcumulada + classeAtual.frequencia)
 
         return tabelaFrequencia
