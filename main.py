@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import sys
 import os
 from pathlib import Path
-from services.ProcessadorEstatistico import ProcessadorEstatistico
-from services.GraficoService import GraficoService
-from utils.MensagemUtils import MensagemUtils
+from services.processador_estatistico import ProcessadorEstatistico
+from services.grafico_service import GraficoService
+from utils.mensagem_utils import MensagemUtils
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 

@@ -1,4 +1,4 @@
-from models.FrequenciaClasse import FrequenciaClasse
+from models.frequencia_classe import FrequenciaClasse
 from prettytable import PrettyTable
 
 class TabelaFrequencia:

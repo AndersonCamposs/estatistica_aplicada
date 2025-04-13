@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from models.TabelaFrequencia import TabelaFrequencia
+from models.tabela_frequencia import TabelaFrequencia
 class GraficoService:
     def __init__(self, processadorEstatistico) -> None:
         pass

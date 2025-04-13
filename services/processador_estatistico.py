@@ -1,7 +1,7 @@
-from models.TabelaPrimitiva import TabelaPrimitiva
-from models.DistribuicaoEstatistica import DistribuicaoEstatistica
-from models.TabelaFrequencia import TabelaFrequencia
-from models.FrequenciaClasse import FrequenciaClasse
+from models.tabela_primitiva import TabelaPrimitiva
+from models.distribuicao_estatistica import DistribuicaoEstatistica
+from models.tabela_frequencia import TabelaFrequencia
+from models.frequencia_classe import FrequenciaClasse
 
 class ProcessadorEstatistico:
     def __init__(self, valores: list[float]) -> None:
