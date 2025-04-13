@@ -21,5 +21,5 @@ class FrequenciaClasse:
     def setFrequenciaRelativa(self, n):
         self.frequenciaRelativa = self.frequencia / n
     
-    def setFrequenciaAcumulada(self, frequenciaAcumuladaClasseAnterior):
-        self.frequenciaAcumulada = frequenciaAcumuladaClasseAnterior + self.frequencia
+    def setFrequenciaAcumulada(self, frequenciaAcumulada):
+        self.frequenciaAcumulada = frequenciaAcumulada
