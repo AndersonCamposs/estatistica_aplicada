@@ -1,4 +1,5 @@
 from models.FrequenciaClasse import FrequenciaClasse
+from prettytable import PrettyTable
 
 class TabelaFrequencia:
     def __init__(self):
@@ -29,5 +30,17 @@ class TabelaFrequencia:
     
     def obterPontosMedios(self):
         return [i.pontoMedio for i in self.classes]
+    
+    def exibirTabelaFormatada(self):
+        table = PrettyTable()
+        table.add_column("i", [classe.numClasse for classe in self.classes])
+        table.add_column("int.", [classe.getLimites() for classe in self.classes])
+        table.add_column("fi", [classe.frequencia for classe in self.classes])
+        table.add_column("xi", [classe.pontoMedio for classe in self.classes])
+        table.add_column("fi/n", [classe.frequenciaRelativa for classe in self.classes])
+        table.add_column("Fi", [classe.frequenciaAcumulada for classe in self.classes])
+        table.add_row(["////", "////", f"Σ = {self.obterSomatorioFrequencias()}", "////", f"Σ = {self.obterSomatorioFrequenciasRelativas()}", "////"], divider=True)
+
+        print(table)
     
         
