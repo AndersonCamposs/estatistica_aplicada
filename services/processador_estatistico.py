@@ -1,3 +1,4 @@
+from pandas import Series
 from models.tabela_primitiva import TabelaPrimitiva
 from models.distribuicao_estatistica import DistribuicaoEstatistica
 from models.tabela_frequencia import TabelaFrequencia
@@ -39,3 +40,21 @@ class ProcessadorEstatistico:
                 classeAtual.setFrequenciaAcumulada(tabelaFrequencia.classes[i-1].frequenciaAcumulada + classeAtual.frequencia)
 
         return tabelaFrequencia
+
+    def obter_medidas_de_tendencia_central(self, tabela_frequencia: TabelaFrequencia) -> list[float]:
+        #obtém a média ponderada
+        lista_de_freqs = [i for i in tabela_frequencia.obterFrequencias()]
+        lista_pontos_medios = [i for i in tabela_frequencia.obterPontosMedios()]
+        numerador = 0
+        denominador = 0
+        for fi, xi in zip(lista_de_freqs, lista_pontos_medios):
+            numerador += (fi * xi)
+            denominador += fi
+        
+        media_ponderada = numerador/denominador
+
+        # obtém a moda
+        sr = Series(self._distribuicaoEstatistica._rol.dados)
+        moda = sr.mode()
+
+        return moda.tolist()
