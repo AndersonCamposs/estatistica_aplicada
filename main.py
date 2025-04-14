@@ -30,7 +30,17 @@ class Main:
             elif(opt == '2'):
                 self.graficoService.plotPoligono(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
             elif(opt == '3'):
+                self.graficoService.plot_grafico_freq_acum(self.tabelaFrequencia)
+                input("PRESSIONE ENTER PARA CONTINUAR...")
+            elif(opt == '4'):
                 self.tabelaFrequencia.exibirTabelaFormatada()
+                input("PRESSIONE ENTER PARA CONTINUAR...")
+            elif(opt == '5'):
+                print(self.processadorEstatistico._tabelaPrimitiva.dados)
+                self.processadorEstatistico._tabelaPrimitiva.exibirTabelaFormatada()
+                input("PRESSIONE ENTER PARA CONTINUAR...")
+            elif(opt == '6'):
+                print(self.processadorEstatistico._distribuicaoEstatistica._rol.dados)
                 input("PRESSIONE ENTER PARA CONTINUAR...")
             else:
                 print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE.")
