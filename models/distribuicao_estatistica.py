@@ -1,4 +1,5 @@
 from math import log2, ceil
+from prettytable import PrettyTable
 from models.rol import Rol
 
 class DistribuicaoEstatistica:
@@ -17,3 +18,10 @@ class DistribuicaoEstatistica:
     
     def _calcularAmplitudeClasse(self) -> float:
         return ceil(self._h/self._k)
+    
+    def exibirDistribuicaoEmTabela(self): 
+        table = PrettyTable()
+        table.field_names = ["n", "k", "h", "hi", "Lmin", "Lmax"]
+        table.add_row([self._n, self._k, self._h, self._hi, min(self._rol.dados), max(self._rol.dados)], divider=True)
+
+        print(table)
