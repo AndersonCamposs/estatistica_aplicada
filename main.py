@@ -6,6 +6,8 @@ from pathlib import Path
 from services.processador_estatistico import ProcessadorEstatistico
 from services.grafico_service import GraficoService
 from utils.mensagem_utils import MensagemUtils
+from readers.leitor_csv import LeitorCSV
+from readers.leitor_excel import LeitorExcel
 
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
@@ -13,8 +15,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 class Main:
     def __init__(self):
-        df = pd.read_csv(Path(__file__).resolve().parent / "data" / "data.csv")
-        self.processadorEstatistico = ProcessadorEstatistico(df["Nota de matemática 0 - 100"].to_list())
+        self.processadorEstatistico = ProcessadorEstatistico(LeitorCSV(str(Path(__file__).resolve().parent / "data" / "data.csv"), "Nota de matemática 0 - 100").lerArquivo())
         self.tabelaFrequencia = self.processadorEstatistico.obterTabelaFrequencia()
         self.graficoService = GraficoService(self.processadorEstatistico)
 

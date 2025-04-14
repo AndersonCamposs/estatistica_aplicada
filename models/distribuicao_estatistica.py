@@ -1,5 +1,5 @@
 from math import log2, ceil
-from models.Rol import Rol
+from models.rol import Rol
 
 class DistribuicaoEstatistica:
     def __init__(self, dados: list[float]):
