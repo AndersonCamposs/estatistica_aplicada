@@ -56,9 +56,30 @@ class GraficoService:
 
         plt.show()
 
-    def plot_grafico_freq_acum(self, tabelaFrequencia: TabelaFrequencia):
+    def plot_grafico_freq_acum(self, tabelaFrequencia: TabelaFrequencia, n: int):
         limitesSuperiores = [tabelaFrequencia.obterLimitesInferiores()[0]] + tabelaFrequencia.obterLimitesSuperiores()
         freqsAcumuladas = [0] + [i.frequenciaAcumulada for i in tabelaFrequencia.classes]
+
+        plt.plot(limitesSuperiores, freqsAcumuladas, marker='o', linestyle='-', color='blue')
+
+        plt.xticks(limitesSuperiores, labels=[str(i) for i in limitesSuperiores])
+
+        plt.ylim(0)
+        plt.axhline(y=0, color='black', linewidth=1.0)
+        plt.yticks(range(0, n + 30, 100)) 
+
+        for xi, yi in zip(limitesSuperiores, freqsAcumuladas):
+            plt.plot([xi, xi], [0, yi], 'r--', linewidth=1)
+
+        for x, y in zip(limitesSuperiores, freqsAcumuladas):
+            plt.text(x + 2, y + 5, str(y), ha='left', fontsize=10, color='black')
+
+        plt.title("Gráfico de frequência acumulada")
+        plt.xlabel("Notas de matemática")
+        plt.ylabel("Frequências acumuladas")
+
+        plt.show()
+
         
 
 
