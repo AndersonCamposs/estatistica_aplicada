@@ -30,21 +30,21 @@ class Main:
             elif(opt == '2'):
                 self.graficoService.plotPoligono(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
             elif(opt == '3'):
-                self.graficoService.plot_grafico_freq_acum(self.tabelaFrequencia)
-                input("PRESSIONE ENTER PARA CONTINUAR...")
+                self.graficoService.plot_grafico_freq_acum(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._n)
             elif(opt == '4'):
                 self.tabelaFrequencia.exibirTabelaFormatada()
-                input("PRESSIONE ENTER PARA CONTINUAR...")
             elif(opt == '5'):
                 print(self.processadorEstatistico._tabelaPrimitiva.dados)
                 self.processadorEstatistico._tabelaPrimitiva.exibirTabelaFormatada()
-                input("PRESSIONE ENTER PARA CONTINUAR...")
             elif(opt == '6'):
                 print(self.processadorEstatistico._distribuicaoEstatistica._rol.dados)
-                input("PRESSIONE ENTER PARA CONTINUAR...")
+            elif(opt == '7'):
+                self.processadorEstatistico._distribuicaoEstatistica.exibirDistribuicaoEmTabela()
+                
             else:
                 print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE.")
             
+            input("PRESSIONE ENTER PARA CONTINUAR...")
             os.system("cls")
         
         #self.graficoService.plotHistograma(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi, self.processadorEstatistico._distribuicaoEstatistica._k)
