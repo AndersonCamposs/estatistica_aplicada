@@ -1,0 +1,5 @@
+- pandas: para leitura dos arquivos contendo os dados e processamento
+    |_ openpyxl: dependência necessária para caso seja feita a leitura de arquivos excel
+
+- matplotlib: para criação a apresentação dos gráficos
+- prettytable: para exibição de tabelas formatadas
