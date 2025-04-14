@@ -56,6 +56,12 @@ class GraficoService:
 
         plt.show()
 
+    def plot_grafico_freq_acum(self, tabelaFrequencia: TabelaFrequencia):
+        limitesSuperiores = [tabelaFrequencia.obterLimitesInferiores()[0]] + tabelaFrequencia.obterLimitesSuperiores()
+        freqsAcumuladas = [0] + [i.frequenciaAcumulada for i in tabelaFrequencia.classes]
+        
+
+
 
         
 
