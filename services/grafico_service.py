@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from models.tabela_frequencia import TabelaFrequencia
 class GraficoService:
-    def __init__(self, processadorEstatistico) -> None:
+    def __init__(self) -> None:
         pass
 
     def plotHistograma(self, tabelaFrequencia: TabelaFrequencia, hi: float, k: float):

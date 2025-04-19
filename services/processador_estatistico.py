@@ -9,6 +9,8 @@ class ProcessadorEstatistico:
     def __init__(self, valores: list[float]) -> None:
         self._tabelaPrimitiva: TabelaPrimitiva = TabelaPrimitiva(valores)
         self._distribuicaoEstatistica: DistribuicaoEstatistica = DistribuicaoEstatistica(self._tabelaPrimitiva.dados)
+        self._tabela_frequencia: TabelaFrequencia = self.obterTabelaFrequencia()
+        
     
     def obterTabelaFrequencia(self) -> TabelaFrequencia:
         copyRol = self._distribuicaoEstatistica._rol.dados.copy()
@@ -42,35 +44,35 @@ class ProcessadorEstatistico:
 
         return tabelaFrequencia
 
-    def obter_medidas_de_tendencia_central(self, tabela_frequencia: TabelaFrequencia) -> list[float]:
+    def obter_medidas_de_tendencia_central(self) -> list[float]:
         sr = Series(self._distribuicaoEstatistica._rol.dados)
         moda = sr.mode()
-        media_ponderada = self._calcular_media_ponderada(tabela_frequencia)
-        mediana = self._calcular_mediana(tabela_frequencia)
+        media_ponderada = self._calcular_media_ponderada()
+        mediana = self._calcular_mediana()
         
         table = PrettyTable()
         table.field_names = ["MODA", "MÉDIA PONDERADA", "MEDIANA"]
         table.add_row([moda.tolist(), media_ponderada, mediana])
         print(table)
     
-    def _calcular_mediana(self, tabela_frequencia: TabelaFrequencia):
-        freq_acumulada_alvo = (tabela_frequencia.obterSomatorioFrequencias() / 2)
+    def _calcular_mediana(self):
+        freq_acumulada_alvo = (self._tabela_frequencia.obterSomatorioFrequencias() / 2)
         i = None
         i_anterior = None
 
-        for j in range(len(tabela_frequencia.classes)):
-            if(tabela_frequencia.classes[j].frequenciaAcumulada > freq_acumulada_alvo):
-                i = tabela_frequencia.classes[j]
-                i_anterior = tabela_frequencia.classes[j - 1]
+        for j in range(len(self._tabela_frequencia.classes)):
+            if(self._tabela_frequencia.classes[j].frequenciaAcumulada > freq_acumulada_alvo):
+                i = self._tabela_frequencia.classes[j]
+                i_anterior = self._tabela_frequencia.classes[j - 1]
                 break
        
         
-        mediana: float = round(((i.limiteSuperior - i.limiteInferior) * (tabela_frequencia.obterSomatorioFrequencias() - i_anterior.frequenciaAcumulada) + (i.frequencia * i.limiteInferior)) / i.frequencia, 2)
+        mediana: float = round(((i.limiteSuperior - i.limiteInferior) * (self._tabela_frequencia.obterSomatorioFrequencias() - i_anterior.frequenciaAcumulada) + (i.frequencia * i.limiteInferior)) / i.frequencia, 2)
         return mediana
     
-    def _calcular_media_ponderada(self, tabela_frequencia: TabelaFrequencia):
-        lista_de_freqs = [i for i in tabela_frequencia.obterFrequencias()]
-        lista_pontos_medios = [i for i in tabela_frequencia.obterPontosMedios()]
+    def _calcular_media_ponderada(self):
+        lista_de_freqs = [i for i in self._tabela_frequencia.obterFrequencias()]
+        lista_pontos_medios = [i for i in self._tabela_frequencia.obterPontosMedios()]
         numerador = 0
         denominador = 0
         for fi, xi in zip(lista_de_freqs, lista_pontos_medios):

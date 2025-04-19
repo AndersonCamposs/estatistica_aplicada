@@ -16,8 +16,7 @@ sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 class Main:
     def __init__(self):
         self.processadorEstatistico = ProcessadorEstatistico(LeitorCSV(str(Path(__file__).resolve().parent / "data" / "data.csv"), "Nota de matemática 0 - 100").lerArquivo())
-        self.tabelaFrequencia = self.processadorEstatistico.obterTabelaFrequencia()
-        self.graficoService = GraficoService(self.processadorEstatistico)
+        self.graficoService = GraficoService()
 
     def run(self):
         while(True):
@@ -26,13 +25,13 @@ class Main:
             if (opt == '0'):
                 break
             elif(opt == '1'):
-                self.graficoService.plotHistograma(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi, self.processadorEstatistico._distribuicaoEstatistica._k)
+                self.graficoService.plotHistograma(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._hi, self.processadorEstatistico._distribuicaoEstatistica._k)
             elif(opt == '2'):
-                self.graficoService.plotPoligono(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
+                self.graficoService.plotPoligono(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
             elif(opt == '3'):
-                self.graficoService.plot_grafico_freq_acum(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._n)
+                self.graficoService.plot_grafico_freq_acum(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._n)
             elif(opt == '4'):
-                self.tabelaFrequencia.exibirTabelaFormatada()
+                self.processadorEstatistico._tabela_frequencia.exibirTabelaFormatada()
             elif(opt == '5'):
                 print(self.processadorEstatistico._tabelaPrimitiva.dados)
                 self.processadorEstatistico._tabelaPrimitiva.exibirTabelaFormatada()
@@ -41,7 +40,7 @@ class Main:
             elif(opt == '7'):
                 self.processadorEstatistico._distribuicaoEstatistica.exibirDistribuicaoEmTabela()
             elif(opt == '8'):
-                self.processadorEstatistico.obter_medidas_de_tendencia_central(self.tabelaFrequencia)
+                self.processadorEstatistico.obter_medidas_de_tendencia_central()
             elif(opt == '9'):
                 print("MEDIDAS DE DISPERSÃO")
             else:
