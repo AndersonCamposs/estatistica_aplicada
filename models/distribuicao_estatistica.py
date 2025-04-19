@@ -1,4 +1,4 @@
-from math import log2, ceil
+from math import log2, ceil, floor
 from prettytable import PrettyTable
 from models.rol import Rol
 

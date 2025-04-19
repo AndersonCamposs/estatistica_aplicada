@@ -41,7 +41,9 @@ class Main:
             elif(opt == '7'):
                 self.processadorEstatistico._distribuicaoEstatistica.exibirDistribuicaoEmTabela()
             elif(opt == '8'):
-                print("MODA: ", self.processadorEstatistico.obter_medidas_de_tendencia_central(self.tabelaFrequencia))
+                self.processadorEstatistico.obter_medidas_de_tendencia_central(self.tabelaFrequencia)
+            elif(opt == '9'):
+                print("MEDIDAS DE DISPERSÃO")
             else:
                 print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE.")
             

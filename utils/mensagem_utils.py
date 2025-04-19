@@ -17,4 +17,5 @@ class MensagemUtils:
         table.add_row([6, "ROL"], divider=True)
         table.add_row([7, "EXIBIR DISTRIBUIÇÃO ESTATÍSTICA(n, k, h, hi, Lmin, Lmax)"], divider=True)
         table.add_row([8, "EXIBIR MEDIDAS DE TENDÊNCIA CENTRAL(média ponderada, moda, mediana)"], divider=True)
+        table.add_row([9, "EXIBIR MEDIDAS DE DISPERSÃO(AMPLITUDE, DESVIO MÉDIO, VARIÂNCIA, DESVIO PADRÃO)"], divider=True)
         print(table)
