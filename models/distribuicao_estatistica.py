@@ -9,6 +9,10 @@ class DistribuicaoEstatistica:
         self._k = self._calcularNumeroClasses()
         self._h = self._calcularAmplitudeTotal()
         self._hi = self._calcularAmplitudeClasse()
+        self._moda = []
+        self._media_ponderada = 0
+        self._mediana = 0 
+
 
     def _calcularNumeroClasses(self) -> float:
         return ceil(1 + log2(self._n))
@@ -23,5 +27,12 @@ class DistribuicaoEstatistica:
         table = PrettyTable()
         table.field_names = ["n", "k", "h", "hi", "Lmin", "Lmax"]
         table.add_row([self._n, self._k, self._h, self._hi, min(self._rol.dados), max(self._rol.dados)], divider=True)
+
+        print(table)
+
+    def exibir_medidas_tendencia_central(self):
+        table = PrettyTable()
+        table.field_names = ["MODA", "MÉDIA PONDERADA", "MEDIANA"]
+        table.add_row([self._moda, self._media_ponderada, self._mediana], divider=True)
 
         print(table)

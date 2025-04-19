@@ -8,19 +8,19 @@ from models.frequencia_classe import FrequenciaClasse
 class ProcessadorEstatistico:
     def __init__(self, valores: list[float]) -> None:
         self._tabelaPrimitiva: TabelaPrimitiva = TabelaPrimitiva(valores)
-        self._distribuicaoEstatistica: DistribuicaoEstatistica = DistribuicaoEstatistica(self._tabelaPrimitiva.dados)
+        self._distribuicao_estatistica: DistribuicaoEstatistica = DistribuicaoEstatistica(self._tabelaPrimitiva.dados)
         self._tabela_frequencia: TabelaFrequencia = self.obterTabelaFrequencia()
-        
+        self._obter_medidas_de_tendencia_central()
     
     def obterTabelaFrequencia(self) -> TabelaFrequencia:
-        copyRol = self._distribuicaoEstatistica._rol.dados.copy()
+        copyRol = self._distribuicao_estatistica._rol.dados.copy()
         count = 1
         tabelaFrequencia = TabelaFrequencia()
         #limite inferior da primeira classe
         limiteInferior = copyRol[0]
 
-        while(count <= self._distribuicaoEstatistica._k):
-            frequenciaClasse = FrequenciaClasse(count, limiteInferior=limiteInferior, limiteSuperior=limiteInferior + self._distribuicaoEstatistica._hi)
+        while(count <= self._distribuicao_estatistica._k):
+            frequenciaClasse = FrequenciaClasse(count, limiteInferior=limiteInferior, limiteSuperior=limiteInferior + self._distribuicao_estatistica._hi)
             # o limite inferior da próxima classe será o limite superior da atual
             limiteInferior = frequenciaClasse.limiteSuperior
             tabelaFrequencia.classes.append(frequenciaClasse)
@@ -36,7 +36,7 @@ class ProcessadorEstatistico:
             
             classeAtual.setFrequencia()
             classeAtual.setPontoMedio()
-            classeAtual.setFrequenciaRelativa(self._distribuicaoEstatistica._n)
+            classeAtual.setFrequenciaRelativa(self._distribuicao_estatistica._n)
             if (classeAtual.numClasse == 1):
                 classeAtual.setFrequenciaAcumulada(classeAtual.frequencia)
             else:
@@ -44,16 +44,15 @@ class ProcessadorEstatistico:
 
         return tabelaFrequencia
 
-    def obter_medidas_de_tendencia_central(self) -> list[float]:
-        sr = Series(self._distribuicaoEstatistica._rol.dados)
+    def _obter_medidas_de_tendencia_central(self) -> None:
+        sr = Series(self._distribuicao_estatistica._rol.dados)
         moda = sr.mode()
         media_ponderada = self._calcular_media_ponderada()
         mediana = self._calcular_mediana()
         
-        table = PrettyTable()
-        table.field_names = ["MODA", "MÉDIA PONDERADA", "MEDIANA"]
-        table.add_row([moda.tolist(), media_ponderada, mediana])
-        print(table)
+        self._distribuicao_estatistica._moda = moda.tolist()
+        self._distribuicao_estatistica._media_ponderada = media_ponderada
+        self._distribuicao_estatistica._mediana = mediana
     
     def _calcular_mediana(self):
         freq_acumulada_alvo = (self._tabela_frequencia.obterSomatorioFrequencias() / 2)
