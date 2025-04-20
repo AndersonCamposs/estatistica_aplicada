@@ -1,5 +1,5 @@
 from pandas import Series
-from prettytable import PrettyTable
+from math import sqrt
 from models.tabela_primitiva import TabelaPrimitiva
 from models.distribuicao_estatistica import DistribuicaoEstatistica
 from models.tabela_frequencia import TabelaFrequencia
@@ -11,6 +11,7 @@ class ProcessadorEstatistico:
         self._distribuicao_estatistica: DistribuicaoEstatistica = DistribuicaoEstatistica(self._tabelaPrimitiva.dados)
         self._tabela_frequencia: TabelaFrequencia = self.obterTabelaFrequencia()
         self._obter_medidas_de_tendencia_central()
+        self._obter_medidas_dispersao()
     
     def obterTabelaFrequencia(self) -> TabelaFrequencia:
         copyRol = self._distribuicao_estatistica._rol.dados.copy()
@@ -81,3 +82,30 @@ class ProcessadorEstatistico:
         media_ponderada = numerador/denominador
 
         return media_ponderada
+
+    def _obter_medidas_dispersao(self) -> None:
+        desvio_medio = self._calcular_desvio_medio()
+        variancia = self._calcular_variancia()
+        desvio_padrao = self._calcular_desvio_padrao(variancia)
+
+        self._distribuicao_estatistica._desvio_medio = desvio_medio
+        self._distribuicao_estatistica._variancia = variancia
+        self._distribuicao_estatistica._desvio_padrao = desvio_padrao
+
+
+    def _calcular_desvio_medio(self):
+        somatorio = 0
+        for i in self._tabela_frequencia.classes:
+            somatorio += i.frequencia * abs(i.pontoMedio - self._distribuicao_estatistica._media_ponderada)
+
+        return somatorio / self._distribuicao_estatistica._n
+    
+    def _calcular_variancia(self):
+        somatorio = 0
+        for i in self._tabela_frequencia.classes:
+            somatorio += i.frequencia * pow(i.pontoMedio - self._distribuicao_estatistica._media_ponderada, 2)
+
+        return somatorio / self._distribuicao_estatistica._n
+    
+    def _calcular_desvio_padrao(self, variancia):
+        return round(sqrt(variancia), 2)

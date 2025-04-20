@@ -42,7 +42,7 @@ class Main:
             elif(opt == '8'):
                 self.processadorEstatistico._distribuicao_estatistica.exibir_medidas_tendencia_central()
             elif(opt == '9'):
-                print("MEDIDAS DE DISPERSÃO")
+                self.processadorEstatistico._distribuicao_estatistica.exibir_medidas_dispersao()
             else:
                 print("OPÇÃO INVÁLIDA, TENTE NOVAMENTE.")
             

@@ -12,6 +12,9 @@ class DistribuicaoEstatistica:
         self._moda = []
         self._media_ponderada = 0
         self._mediana = 0 
+        self._desvio_medio = 0
+        self._variancia = 0
+        self._desvio_padrao = 0
 
 
     def _calcularNumeroClasses(self) -> float:
@@ -34,5 +37,12 @@ class DistribuicaoEstatistica:
         table = PrettyTable()
         table.field_names = ["MODA", "MÉDIA PONDERADA", "MEDIANA"]
         table.add_row([self._moda, self._media_ponderada, self._mediana], divider=True)
+
+        print(table)
+
+    def exibir_medidas_dispersao(self):
+        table = PrettyTable()
+        table.field_names = ["AMPLITUDE", "DESVIO MÉDIO", "VARIÂNCIA", "DESVIO PADRÃO"]
+        table.add_row([self._h, self._desvio_medio, self._variancia, self._desvio_padrao], divider=True)
 
         print(table)
