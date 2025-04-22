@@ -88,9 +88,9 @@ class ProcessadorEstatistico:
         variancia = self._calcular_variancia()
         desvio_padrao = self._calcular_desvio_padrao(variancia)
 
-        self._distribuicao_estatistica._desvio_medio = desvio_medio
-        self._distribuicao_estatistica._variancia = variancia
-        self._distribuicao_estatistica._desvio_padrao = desvio_padrao
+        self._distribuicao_estatistica._desvio_medio = round(desvio_medio, 2)
+        self._distribuicao_estatistica._variancia = round(variancia, 2)
+        self._distribuicao_estatistica._desvio_padrao = round(desvio_padrao, 2)
 
 
     def _calcular_desvio_medio(self):
