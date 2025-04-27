@@ -25,20 +25,20 @@ class Main:
             if (opt == '0'):
                 break
             elif(opt == '1'):
-                self.graficoService.plotHistograma(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._hi, self.processadorEstatistico._distribuicaoEstatistica._k)
+                self.graficoService.plotHistograma(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicao_estatistica._hi, self.processadorEstatistico._distribuicao_estatistica._k)
             elif(opt == '2'):
-                self.graficoService.plotPoligono(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
+                self.graficoService.plotPoligono(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicao_estatistica._hi)
             elif(opt == '3'):
-                self.graficoService.plot_grafico_freq_acum(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicaoEstatistica._n)
+                self.graficoService.plot_grafico_freq_acum(self.processadorEstatistico._tabela_frequencia, self.processadorEstatistico._distribuicao_estatistica._n)
             elif(opt == '4'):
                 self.processadorEstatistico._tabela_frequencia.exibirTabelaFormatada()
             elif(opt == '5'):
                 print(self.processadorEstatistico._tabelaPrimitiva.dados)
                 self.processadorEstatistico._tabelaPrimitiva.exibirTabelaFormatada()
             elif(opt == '6'):
-                print(self.processadorEstatistico._distribuicaoEstatistica._rol.dados)
+                print(self.processadorEstatistico._distribuicao_estatistica._rol.dados)
             elif(opt == '7'):
-                self.processadorEstatistico._distribuicaoEstatistica.exibirDistribuicaoEmTabela()
+                self.processadorEstatistico._distribuicao_estatistica.exibirDistribuicaoEmTabela()
             elif(opt == '8'):
                 self.processadorEstatistico._distribuicao_estatistica.exibir_medidas_tendencia_central()
             elif(opt == '9'):
@@ -49,8 +49,8 @@ class Main:
             input("PRESSIONE ENTER PARA CONTINUAR...")
             os.system("cls")
         
-        #self.graficoService.plotHistograma(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi, self.processadorEstatistico._distribuicaoEstatistica._k)
-        #self.graficoService.plotPoligono(self.tabelaFrequencia, self.processadorEstatistico._distribuicaoEstatistica._hi)
+        #self.graficoService.plotHistograma(self.tabelaFrequencia, self.processadorEstatistico._distribuicao_estatistica._hi, self.processadorEstatistico._distribuicao_estatistica._k)
+        #self.graficoService.plotPoligono(self.tabelaFrequencia, self.processadorEstatistico._distribuicao_estatistica._hi)
 
 
 def main():

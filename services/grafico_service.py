@@ -11,7 +11,8 @@ class GraficoService:
         amplitudes: list[float] = [hi for i in range(k)]
         posicoes = limitesInferiores.copy()
 
-        plt.bar(posicoes, frequencias, width=amplitudes, align='edge', edgecolor='black', color='lightgreen')
+        plt.bar(posicoes, frequencias, width=amplitudes, align='edge', 
+            edgecolor='black', color='lightgreen')
         
         x_label = [limitesInferiores[0]] + limitesSuperiores
         plt.xticks(x_label, labels=[str(i) for i in x_label])
@@ -33,7 +34,6 @@ class GraficoService:
     def plotPoligono(self, tabelaFrequencia: TabelaFrequencia, hi: float):
         pontosMedios: list[float] = tabelaFrequencia.obterPontosMedios()
         frequencias: list[int] = tabelaFrequencia.obterFrequencias()
-
         pontosMedios = [pontosMedios[0] - hi] + pontosMedios + [pontosMedios[-1] + hi]
         frequencias = [0] + frequencias + [0]
 
@@ -44,13 +44,10 @@ class GraficoService:
         plt.ylim(0)
         plt.axhline(y=0, color='black', linewidth=1.0)
         plt.yticks(range(0, max(frequencias) + 30, 25)) 
-
         plt.title("Polígono de frequência")
         plt.xlabel("Notas de matemática")
         plt.ylabel("Frequências")
-
         plt.grid(True, linestyle='--', alpha=0.7)
-
         for x, y in zip(pontosMedios, frequencias):
             plt.text(x - 2, y + 4, str(y), ha='left', fontsize=10, color='black')
 
@@ -59,11 +56,8 @@ class GraficoService:
     def plot_grafico_freq_acum(self, tabelaFrequencia: TabelaFrequencia, n: int):
         limitesSuperiores = [tabelaFrequencia.obterLimitesInferiores()[0]] + tabelaFrequencia.obterLimitesSuperiores()
         freqsAcumuladas = [0] + [i.frequenciaAcumulada for i in tabelaFrequencia.classes]
-
         plt.plot(limitesSuperiores, freqsAcumuladas, marker='o', linestyle='-', color='blue')
-
         plt.xticks(limitesSuperiores, labels=[str(i) for i in limitesSuperiores])
-
         plt.ylim(0)
         plt.axhline(y=0, color='black', linewidth=1.0)
         plt.yticks(range(0, n + 30, 100)) 

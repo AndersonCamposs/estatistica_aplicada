@@ -21,7 +21,8 @@ class ProcessadorEstatistico:
         limiteInferior = copyRol[0]
 
         while(count <= self._distribuicao_estatistica._k):
-            frequenciaClasse = FrequenciaClasse(count, limiteInferior=limiteInferior, limiteSuperior=limiteInferior + self._distribuicao_estatistica._hi)
+            frequenciaClasse = FrequenciaClasse(count, 
+            limiteInferior=limiteInferior, limiteSuperior=limiteInferior + self._distribuicao_estatistica._hi)
             # o limite inferior da próxima classe será o limite superior da atual
             limiteInferior = frequenciaClasse.limiteSuperior
             tabelaFrequencia.classes.append(frequenciaClasse)
@@ -41,7 +42,8 @@ class ProcessadorEstatistico:
             if (classeAtual.numClasse == 1):
                 classeAtual.setFrequenciaAcumulada(classeAtual.frequencia)
             else:
-                classeAtual.setFrequenciaAcumulada(tabelaFrequencia.classes[i-1].frequenciaAcumulada + classeAtual.frequencia)
+                classeAtual.setFrequenciaAcumulada(
+                    tabelaFrequencia.classes[i-1].frequenciaAcumulada + classeAtual.frequencia)
 
         return tabelaFrequencia
 
@@ -67,7 +69,7 @@ class ProcessadorEstatistico:
                 break
        
         
-        mediana: float = round(((i.limiteSuperior - i.limiteInferior) * (self._tabela_frequencia.obterSomatorioFrequencias() - i_anterior.frequenciaAcumulada) + (i.frequencia * i.limiteInferior)) / i.frequencia, 2)
+        mediana: float = ((i.limiteSuperior - i.limiteInferior) * ((self._tabela_frequencia.obterSomatorioFrequencias()/2) - i_anterior.frequenciaAcumulada) + (i.frequencia * i.limiteInferior)) / i.frequencia
         return mediana
     
     def _calcular_media_ponderada(self):
@@ -78,6 +80,8 @@ class ProcessadorEstatistico:
         for fi, xi in zip(lista_de_freqs, lista_pontos_medios):
             numerador += (fi * xi)
             denominador += fi
+            
+        print(denominador)
         
         media_ponderada = numerador/denominador
 
@@ -88,9 +92,9 @@ class ProcessadorEstatistico:
         variancia = self._calcular_variancia()
         desvio_padrao = self._calcular_desvio_padrao(variancia)
 
-        self._distribuicao_estatistica._desvio_medio = round(desvio_medio, 2)
-        self._distribuicao_estatistica._variancia = round(variancia, 2)
-        self._distribuicao_estatistica._desvio_padrao = round(desvio_padrao, 2)
+        self._distribuicao_estatistica._desvio_medio = desvio_medio
+        self._distribuicao_estatistica._variancia = variancia
+        self._distribuicao_estatistica._desvio_padrao = desvio_padrao
 
 
     def _calcular_desvio_medio(self):
@@ -108,4 +112,4 @@ class ProcessadorEstatistico:
         return somatorio / self._distribuicao_estatistica._n
     
     def _calcular_desvio_padrao(self, variancia):
-        return round(sqrt(variancia), 2)
+        return sqrt(variancia)
